@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   print_int.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/27 16:24:45 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/28 19:49:49 by hrigrigo         ###   ########.fr       */
+/*   Created: 2024/01/28 19:50:06 by hrigrigo          #+#    #+#             */
+/*   Updated: 2024/01/28 19:52:01 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+# include "ft_printf.h"
 
-# include <unistd.h>
-# include <stddef.h>
-# include <stdarg.h>
-#include <stdio.h>
-
-int	ft_printf(const char *format, ...);
-int print_charc(char c);
-int print_strs(char *str);
-
-#endif
+int print_intd(int n)
+{
+	if (n < 0)
+	{
+		if (n == -2147483648)
+		{
+			ft_p("-2147483648", fd);
+			return ;
+		}
+		ft_putchar_fd('-', fd);
+		n *= -1;
+	}
+	if (n > 9)
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
+	else
+		ft_putchar_fd(n + '0', fd);
+}

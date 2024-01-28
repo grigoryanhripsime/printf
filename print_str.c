@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   print_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/27 16:24:45 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/28 19:49:49 by hrigrigo         ###   ########.fr       */
+/*   Created: 2024/01/28 19:42:45 by hrigrigo          #+#    #+#             */
+/*   Updated: 2024/01/28 19:48:28 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+# include "ft_printf.h"
 
-# include <unistd.h>
-# include <stddef.h>
-# include <stdarg.h>
-#include <stdio.h>
+int print_strs(char *str)
+{
+	int	i;
 
-int	ft_printf(const char *format, ...);
-int print_charc(char c);
-int print_strs(char *str);
-
-#endif
+	i = 0;
+	while(str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	return (i);
+}
