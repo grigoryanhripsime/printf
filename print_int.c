@@ -14,21 +14,22 @@
 
 int print_intd(int n)
 {
+	int count;
+
+	count = 0;
 	if (n < 0)
 	{
 		if (n == -2147483648)
-		{
-			ft_p("-2147483648", fd);
-			return ;
-		}
-		ft_putchar_fd('-', fd);
+			return(print_strs("-2147483648"));
+		count += print_charc('-');
 		n *= -1;
 	}
 	if (n > 9)
 	{
-		ft_putnbr_fd(n / 10, fd);
-		ft_putnbr_fd(n % 10, fd);
+		print_intd(n / 10);
+		print_intd(n % 10);
 	}
 	else
-		ft_putchar_fd(n + '0', fd);
+		count += print_charc(n + '0');
+	return (count);
 }

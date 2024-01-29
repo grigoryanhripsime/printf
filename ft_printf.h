@@ -19,7 +19,7 @@
 #include <stdio.h>
 
 int	ft_printf(const char *format, ...);
-int print_charc(char c);
+int print_charc(int c);
 int print_strs(char *str);
-
+int print_intd(int n);
 #endif

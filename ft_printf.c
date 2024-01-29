@@ -15,21 +15,22 @@
 static int check(char c, va_list args)
 {
 	if (c == 'c')
-		return (print_charc(va_arg(args, char)));
+		return (print_charc(va_arg(args, int)));
 	if (c == 's')
 		return (print_strs(va_arg(args, char *)));
-	if (c == 'p')
-		return (print_pointp(va_arg(args, void *)));
+	//if (c == 'p')
+	//	return (print_pointp(va_arg(args, void *)));
 	if (c == 'd' || c == 'i')
 		return (print_intd(va_arg(args, int)));
-	if (c == 'u')
+	/*if (c == 'u')
 		return (print_intu(va_arg(args, unsigned int)));
 	if (c == 'x')
 		return (print_hexl(va_arg(args, unsigned int)));
 	if (c == 'X')
 		return (print_hexu(va_arg(args, unsigned int)));
 	if (c == '%')
-		return (print_percent());
+		return (print_percent());*/
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -43,10 +44,12 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			if (!check(format[i + 1]))
-				return ;
+			if (!check(format[i + 1], args))
+				return (0);
+			i++;
 		}
-		write(1, &format[i], 1);
+		else
+			write(1, &format[i], 1);
 		i++;
 	}
 	va_end(args);
