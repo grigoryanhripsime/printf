@@ -2,7 +2,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -I$(INCS)
 
-SRCS = ft_printf.c print_char.c print_str.c print_int.c
+SRCS = ft_printf.c print_char.c print_str.c print_int.c print_hex.c print_address.c
 
 INCS = ./
 

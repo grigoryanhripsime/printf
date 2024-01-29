@@ -6,22 +6,37 @@
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 19:50:06 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/28 19:52:01 by hrigrigo         ###   ########.fr       */
+/*   Updated: 2024/01/29 18:36:46 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "ft_printf.h"
 
-int print_intd(int n)
+static int count(int n)
 {
 	int count;
 
 	count = 0;
 	if (n < 0)
+		count++;
+	while (n)
+	{
+		count++;
+		n /= 10;
+	}
+	return (count);
+}
+
+static void print_int(int n)
+{
+	if (n < 0)
 	{
 		if (n == -2147483648)
-			return(print_strs("-2147483648"));
-		count += print_charc('-');
+		{
+			print_strs("-2147483648");
+			return ;
+		}
+		print_charc('-');
 		n *= -1;
 	}
 	if (n > 9)
@@ -30,6 +45,29 @@ int print_intd(int n)
 		print_intd(n % 10);
 	}
 	else
-		count += print_charc(n + '0');
-	return (count);
+		print_charc(n + '0');
+}
+
+int print_intd(int n)
+{
+	print_int(n);
+	return (count(n));
+}
+
+
+static void print_uint(unsigned int n)
+{
+	if (n > 9)
+	{
+		print_intd(n / 10);
+		print_intd(n % 10);
+	}
+	else
+		print_charc(n + '0');
+}
+
+int print_intu(unsigned int n)
+{
+	print_uint(n);
+	return (count(n));
 }
