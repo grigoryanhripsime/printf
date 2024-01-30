@@ -1,31 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_str.c                                        :+:      :+:    :+:   */
+/*   print_unsigned.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/28 19:42:45 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/30 18:57:30 by hrigrigo         ###   ########.fr       */
+/*   Created: 2024/01/30 17:59:04 by hrigrigo          #+#    #+#             */
+/*   Updated: 2024/01/30 18:58:13 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	print_strs(char *str)
+static int	count(unsigned int n)
 {
-	int	i;
+	int	count;
 
-	if (!str)
+	count = 0;
+	if (n <= 0)
+		count++;
+	while (n)
 	{
-		write(1, "(null)", 6);
-		return (6);
+		count++;
+		n /= 10;
 	}
-	i = 0;
-	while (str[i])
+	return (count);
+}
+
+static void	print_uint(unsigned int n)
+{
+	if (n > 9)
 	{
-		write(1, &str[i], 1);
-		i++;
+		print_intd(n / 10);
+		print_intd(n % 10);
 	}
-	return (i);
+	else
+		print_charc(n + '0');
+}
+
+int	print_intu(unsigned int n)
+{
+	print_uint(n);
+	return (count(n));
 }

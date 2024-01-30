@@ -6,17 +6,18 @@
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 17:34:19 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/29 17:49:59 by hrigrigo         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:55:53 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ft_printf.h"
+#include "ft_printf.h"
 
-//how many charecters will be in hex number
-static int dec_hex_count(unsigned int n)
+static int	hex_count(unsigned int n)
 {
-	int count;
+	int	count;
 
+	if (n == 0)
+		return (1);
 	count = 0;
 	while (n > 0)
 	{
@@ -26,62 +27,46 @@ static int dec_hex_count(unsigned int n)
 	return (count);
 }
 
-static char hex_charl(int n)
+static void	print_hexlower(unsigned int n)
 {
-	if (n >= 10)
-		return (n + 'a' - 10);
-	return (n + '0');
-}
-
-static char hex_charu(int n)
-{
-	if (n >= 10)
-		return (n + 'A' - 10);
-	return (n + '0');
-}
-
-int print_hexl(unsigned int n)
-{
-	int count;
-	char* num;
-	int i;
-
-	i = 0;
-	count = dec_hex_count(n);
-	num = malloc((count + 1) * sizeof(char));
-	if (!num)
-		return (0);
-	while (i < count)
+	if (n > 15)
 	{
-		num[count - i - 1] = hex_charl(n % 16);
-		n /= 16;
-		i++;
+		print_hexl(n / 16);
+		print_hexl(n % 16);
 	}
-	num[count - i - 1] = '\0';
-	print_strs(num);
-	free(num);
-	return (count);
+	else
+	{
+		if (n > 9)
+			print_charc(n + 'a' - 10);
+		else
+			print_charc(n + '0');
+	}
 }
 
-int print_hexu(unsigned int n)
+int	print_hexl(unsigned int n)
 {
-	int count;
-	char* num;
-	int i;
+	print_hexlower(n);
+	return (hex_count(n));
+}
 
-	i = 0;
-	count = dec_hex_count(n);
-	num = malloc((count + 1) * sizeof(char));
-	if (!num)
-		return (0);
-	while (i < count)
+static void	print_hexupper(unsigned int n)
+{
+	if (n > 15)
 	{
-		num[count - i - 1] = hex_charu(n % 16);
-		n /= 16;
-		i++;
+		print_hexu(n / 16);
+		print_hexu(n % 16);
 	}
-	num[count - i - 1] = '\0';
-	print_strs(num);
-	free(num);
-	return (count);
+	else
+	{
+		if (n > 9)
+			print_charc(n + 'A' - 10);
+		else
+			print_charc(n + '0');
+	}
+}
+
+int	print_hexu(unsigned int n)
+{
+	print_hexupper(n);
+	return (hex_count(n));
 }

@@ -6,17 +6,19 @@
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 19:17:43 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/29 19:30:32 by hrigrigo         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:54:04 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ft_printf.h"
+#include "ft_printf.h"
 
-static int long_hex_count(unsigned long n)
+static int	long_hex_count(unsigned long n)
 {
-	int count;
+	int	count;
 
 	count = 0;
+	if (n == 0)
+		return (1);
 	while (n > 0)
 	{
 		count ++;
@@ -25,42 +27,30 @@ static int long_hex_count(unsigned long n)
 	return (count);
 }
 
-static char hex_charl(int n)
+static char	to_char(int n)
 {
 	if (n >= 10)
 		return (n + 'a' - 10);
 	return (n + '0');
 }
 
-static int print_long_hex(unsigned long n)
+static void	print_long_hex(unsigned long n)
 {
-	int count;
-	char* num;
-	int i;
-
-	i = 0;
-	count = long_hex_count(n);
-	num = malloc((count + 1) * sizeof(char));
-	if (!num)
-		return (0);
-	while (i < count)
+	if (n > 15)
 	{
-		num[count - i - 1] = hex_charl(n % 16);
-		n /= 16;
-		i++;
+		print_long_hex(n / 16);
+		print_long_hex(n % 16);
 	}
-	num[count - i - 1] = '\0';
-	print_strs(num);
-	free(num);
-	return (count);
+	else
+		print_charc(to_char(n));
 }
 
-int print_pointp(void *p)
+int	print_pointp(void *p)
 {
-	unsigned long add;
+	unsigned long	add;
 
 	add = (unsigned long) p;
 	print_strs("0x");
 	print_long_hex(add);
-	return (0);
+	return (2 + long_hex_count(add));
 }

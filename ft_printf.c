@@ -6,13 +6,13 @@
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:24:29 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/29 19:18:56 by hrigrigo         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:51:36 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ft_printf.h"
+#include "ft_printf.h"
 
-static int check(char c, va_list args)
+static int	check(char c, va_list args)
 {
 	if (c == 'c')
 		return (print_charc(va_arg(args, int)));
@@ -33,28 +33,24 @@ static int check(char c, va_list args)
 		print_charc('%');
 		return (1);
 	}
-	return (0);
+	print_charc(c);
+	return (1);
 }
 
 int	ft_printf(const char *format, ...)
 {
-	int	i;
-	va_list args;
-	int flag;
-	int count;
+	int		i;
+	va_list	args;
+	int		count;
 
 	count = 0;
 	i = 0;
 	va_start(args, format);
-	while (format[i])
+	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
-			flag = check(format[i + 1], args);
-			if (!flag)
-				i++;
-			else
-				count += flag;
+			count += check(format[i + 1], args);
 			i++;
 		}
 		else
@@ -64,4 +60,3 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (count);
 }
-

@@ -6,18 +6,18 @@
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 19:50:06 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/29 18:36:46 by hrigrigo         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:56:32 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "ft_printf.h"
+#include "ft_printf.h"
 
-static int count(int n)
+static int	count(int n)
 {
-	int count;
+	int	count;
 
 	count = 0;
-	if (n < 0)
+	if (n <= 0)
 		count++;
 	while (n)
 	{
@@ -27,7 +27,7 @@ static int count(int n)
 	return (count);
 }
 
-static void print_int(int n)
+static void	print_int(int n)
 {
 	if (n < 0)
 	{
@@ -48,26 +48,8 @@ static void print_int(int n)
 		print_charc(n + '0');
 }
 
-int print_intd(int n)
+int	print_intd(int n)
 {
 	print_int(n);
-	return (count(n));
-}
-
-
-static void print_uint(unsigned int n)
-{
-	if (n > 9)
-	{
-		print_intd(n / 10);
-		print_intd(n % 10);
-	}
-	else
-		print_charc(n + '0');
-}
-
-int print_intu(unsigned int n)
-{
-	print_uint(n);
 	return (count(n));
 }
