@@ -14,10 +14,7 @@
 # define FT_PRINTF_H
 
 # include <unistd.h>
-# include <stddef.h>
 # include <stdarg.h>
-# include <stdlib.h>
-# include <stdio.h>
 
 int	ft_printf(const char *format, ...);
 int	print_charc(int c);
