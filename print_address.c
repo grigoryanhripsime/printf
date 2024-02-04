@@ -6,7 +6,7 @@
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 19:17:43 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/30 18:54:04 by hrigrigo         ###   ########.fr       */
+/*   Updated: 2024/02/04 12:01:56 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ int	print_pointp(void *p)
 {
 	unsigned long	add;
 
-	if (!p)
-		return (print_strs("(nil)"));
 	add = (unsigned long) p;
 	print_strs("0x");
 	print_long_hex(add);
