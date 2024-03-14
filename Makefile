@@ -2,7 +2,7 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -I$(INCS)
 
-SRCS = ft_printf.c print_char.c print_str.c print_int.c print_hex.c print_address.c print_unsigned.c
+SRCS = ft_printf.c print_char.c print_str.c print_int.c print_hex.c print_address.c print_unsigned_int.c
 
 INCS = ./
 
@@ -14,6 +14,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
+
+.o: .c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJS) $(OBJSB)

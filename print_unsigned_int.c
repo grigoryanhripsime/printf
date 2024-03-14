@@ -6,7 +6,7 @@
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 17:59:04 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/30 18:58:13 by hrigrigo         ###   ########.fr       */
+/*   Updated: 2024/02/24 11:56:58 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	print_uint(unsigned int n)
 		print_charc(n + '0');
 }
 
-int	print_intu(unsigned int n)
+int	print_unsigned(unsigned int n)
 {
 	print_uint(n);
 	return (count(n));

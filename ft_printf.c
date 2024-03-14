@@ -6,7 +6,7 @@
 /*   By: hrigrigo <hrigrigo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 16:24:29 by hrigrigo          #+#    #+#             */
-/*   Updated: 2024/01/30 18:51:36 by hrigrigo         ###   ########.fr       */
+/*   Updated: 2024/02/24 12:13:46 by hrigrigo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check(char c, va_list args)
 	if (c == 'd' || c == 'i')
 		return (print_intd(va_arg(args, int)));
 	if (c == 'u')
-		return (print_intu(va_arg(args, unsigned int)));
+		return (print_unsigned(va_arg(args, unsigned int)));
 	if (c == 'x')
 		return (print_hexl(va_arg(args, unsigned int)));
 	if (c == 'X')
@@ -46,9 +46,11 @@ int	ft_printf(const char *format, ...)
 	count = 0;
 	i = 0;
 	va_start(args, format);
-	while (format[i] != '\0')
+	while (format[i])
 	{
-		if (format[i] == '%')
+		if (format[i] == '%' && !format[i + 1])
+			break ;
+		else if (format[i] == '%')
 		{
 			count += check(format[i + 1], args);
 			i++;
